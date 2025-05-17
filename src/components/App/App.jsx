@@ -1,92 +1,34 @@
-import styles from './App.module.css';
+import './App.module.css';
 
-import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { getPhotos } from '../../api/getPhotos';
-import SearchBar from '../SearchBar/SearchBar';
-import ImageGallery from '../ImageGallery/ImageGallery';
-import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import ImageModal from '../ImageModal/ImageModal';
+import { lazy, Suspense } from 'react';
 
-function App() {
-  const [hits, setHits] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+// const HomeLayout = lazy(() => import('./layouts/HomeLayout/HomeLayout'));
 
-  useEffect(() => {
-    if (!searchQuery) return;
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const ErrorPage = lazy(() => import('../../pages/ErrorPage/ErrorPage'));
+const Movies = lazy(() => import('../../pages/Movies/Movies'));
+const MovieInfo = lazy(() => import('../../pages/MovieInfo/MovieInfo'));
 
-    const fetching = async () => {
-      try {
-        setIsLoading(true);
-        setHasMore(false);
-
-        const data = await getPhotos(searchQuery, page);
-        if (data.results.length === 0) {
-          setHasMore(false);
-          if (page === 1) setError(true);
-        } else {
-          setHasMore(true);
-          setError(false);
-        }
-
-        setHits(prev =>
-          page === 1 ? data.results : [...prev, ...data.results]
-        );
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetching();
-  }, [page, searchQuery]);
-
-  const handleSearch = searchValue => {
-    setSearchQuery(searchValue);
-    setPage(1);
-  };
-
-  const handleLoadMore = async () => {
-    setPage(page + 1);
-  };
-
-  const openModalHandler = image => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
-  };
-
-  const closeModalHandler = () => {
-    setIsModalOpen(false);
-    setSelectedImage(null);
-  };
-
+const App = () => {
   return (
-    <>
-      <div className={styles.appContent}>
-        <SearchBar onSearch={handleSearch} />
-        {error == true && <ErrorMessage />}
-        <ImageGallery
-          data={hits.length > 0 ? hits : []}
-          onImageClick={openModalHandler}
-        />
-        <ImageModal
-          isOpen={isModalOpen}
-          onRequestClose={closeModalHandler}
-          selectedImage={selectedImage}
-        />
-        <Loader isLoading={isLoading} />
-        {hasMore && <LoadMoreBtn handler={handleLoadMore} />}
-      </div>
-    </>
+    <div>
+      {/* <Nav /> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieInfo />}>
+            {/* <Route path="cast" element={<MovieInfoCast />} />
+            <Route path="review" element={<MovieInfoReview />} /> */}
+          </Route>
+
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Suspense>
+    </div>
   );
-}
+};
 
 export default App;
