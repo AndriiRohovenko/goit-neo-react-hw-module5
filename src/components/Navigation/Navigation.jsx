@@ -5,10 +5,20 @@ function Navigation() {
   return (
     <>
       <div className={styles.navigationWrapper}>
-        <NavLink to={'/'} className={styles.navLink}>
+        <NavLink
+          to={'/'}
+          className={({ isActive }) =>
+            isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+          }
+        >
           Home
         </NavLink>
-        <NavLink to={'/movies'} className={styles.navLink}>
+        <NavLink
+          to={'/movies'}
+          className={({ isActive }) =>
+            isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+          }
+        >
           Movies
         </NavLink>
       </div>

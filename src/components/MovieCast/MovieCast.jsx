@@ -20,7 +20,7 @@ function MovieCast() {
         setIsLoading(true);
 
         const data = await getMovieDetailsCredits(movieId);
-        if (data) {
+        if (data.cast.length > 0) {
           setHits(data.cast.slice(0, 20));
           setError(false);
         } else {
@@ -44,7 +44,7 @@ function MovieCast() {
     <>
       <div className={styles.movieCastWrapper}>
         {error == true && (
-          <ErrorMessage message={'Please try to reload the page!'} />
+          <ErrorMessage message={"We don't have any actors for this movie"} />
         )}
         <ul>
           {isLoading ? (

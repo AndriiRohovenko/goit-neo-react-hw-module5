@@ -20,7 +20,7 @@ function MovieReviews() {
         setIsLoading(true);
 
         const data = await getMovieDetailsReviews(movieId);
-        if (data) {
+        if (data.results.length > 0) {
           setHits(data.results);
           setError(false);
         } else {
@@ -43,7 +43,7 @@ function MovieReviews() {
     <>
       <div className={styles.movieCastWrapper}>
         {error == true && (
-          <ErrorMessage message={'Please try to reload the page!'} />
+          <ErrorMessage message={"We don't have any reviews for this movie"} />
         )}
         <ul>
           {isLoading ? (
