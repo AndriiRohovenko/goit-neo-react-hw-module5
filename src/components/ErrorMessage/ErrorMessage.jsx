@@ -1,9 +1,9 @@
-// import styles from './ErrorMessage.module.css';
+import styles from './ErrorMessage.module.css';
 
 function ErrorMessage({ message }) {
   return (
     <>
-      <div>
+      <div className={styles.errorMsgWrapper}>
         <p>No results found. {message} </p>
       </div>
     </>

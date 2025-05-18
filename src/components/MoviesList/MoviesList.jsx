@@ -1,11 +1,11 @@
-// import styles from './MoviesList.module.css';
+import styles from './MoviesList.module.css';
 import { Link, useLocation } from 'react-router-dom';
 
 function MoviesList({ movies }) {
   const location = useLocation();
   return (
     <>
-      <div>
+      <div className={styles.moviesListWrapper}>
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
