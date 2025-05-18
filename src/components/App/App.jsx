@@ -7,9 +7,11 @@ import { lazy, Suspense } from 'react';
 // const HomeLayout = lazy(() => import('./layouts/HomeLayout/HomeLayout'));
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
-const ErrorPage = lazy(() => import('../../pages/ErrorPage/ErrorPage'));
-const Movies = lazy(() => import('../../pages/Movies/Movies'));
-const MovieInfo = lazy(() => import('../../pages/MovieInfo/MovieInfo'));
+const ErrorPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
+const Movies = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
+const MovieInfo = lazy(() =>
+  import('../../pages/MovieDetailsPage/MovieDetailsPage')
+);
 
 const App = () => {
   return (
