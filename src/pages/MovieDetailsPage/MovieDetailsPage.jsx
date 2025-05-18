@@ -2,7 +2,13 @@ import styles from './MovieDetailsPage.module.css';
 import { getMovieDetails } from '../../api/movies';
 
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import {
+  NavLink,
+  useParams,
+  useLocation,
+  useNavigate,
+  Outlet,
+} from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
@@ -14,7 +20,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    const tranding_movies_fetching = async () => {
+    const movies_details_fetching = async () => {
       try {
         setIsLoading(true);
 
@@ -33,7 +39,7 @@ const MovieDetailsPage = () => {
       }
     };
 
-    tranding_movies_fetching();
+    movies_details_fetching();
   }, [movieId]);
 
   const navigate = useNavigate();
@@ -57,6 +63,9 @@ const MovieDetailsPage = () => {
       <button className={styles.goBackBtn} onClick={backButtonHandler}>
         Go Back
       </button>
+      {error == true && (
+        <ErrorMessage message={'Please try to reload the page!'} />
+      )}
       <div className={styles.movieDetailsWrapper}>
         <div className={styles.moviePosterWrapper}>
           {isLoading ? (
@@ -90,6 +99,20 @@ const MovieDetailsPage = () => {
           </>
         </div>
       </div>
+
+      <div>
+        <p>Additional Information</p>
+        <ul>
+          <li>
+            <NavLink to="cast">Cast</NavLink>
+          </li>
+          <li>
+            <NavLink to="reviews">Reviews</NavLink>
+          </li>
+        </ul>
+      </div>
+
+      <Outlet />
     </>
   );
 };

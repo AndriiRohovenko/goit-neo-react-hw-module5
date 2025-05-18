@@ -1,0 +1,8 @@
+.castItemWrapper {
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.castItemWrapper img {
+  max-width: 150px;
+}

@@ -1,6 +1,9 @@
 .movieDetailsWrapper {
   display: flex;
   gap: 20px;
+  box-shadow: 10px 5px 5px grey;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .movieDescriptionWrapper {
