@@ -1,0 +1,16 @@
+.movieDetailsWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.movieDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.goBackBtn {
+  padding: 10px;
+  margin-bottom: 20px;
+}
