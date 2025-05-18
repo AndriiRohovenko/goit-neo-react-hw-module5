@@ -1,10 +1,10 @@
 // import styles from './ErrorMessage.module.css';
 
-function ErrorMessage() {
+function ErrorMessage({ message }) {
   return (
     <>
       <div>
-        <p>No results found. Please try a different search query!</p>
+        <p>No results found. {message} </p>
       </div>
     </>
   );

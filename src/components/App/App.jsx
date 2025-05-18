@@ -6,6 +6,7 @@ import { lazy, Suspense } from 'react';
 
 // const HomeLayout = lazy(() => import('./layouts/HomeLayout/HomeLayout'));
 
+const Navigation = lazy(() => import('../../components/Navigation/Navigation'));
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const ErrorPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
 const Movies = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
@@ -13,11 +14,13 @@ const MovieInfo = lazy(() =>
   import('../../pages/MovieDetailsPage/MovieDetailsPage')
 );
 
+const Loader = lazy(() => import('../../components/Loader/Loader'));
+
 const App = () => {
   return (
     <div>
-      {/* <Nav /> */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Navigation />
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<Movies />} />

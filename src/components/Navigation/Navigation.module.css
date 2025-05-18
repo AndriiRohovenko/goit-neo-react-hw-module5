@@ -1,0 +1,14 @@
+.navigationWrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  height: 60px;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 10px 5px 5px grey;
+}
+
+.navLink {
+}
