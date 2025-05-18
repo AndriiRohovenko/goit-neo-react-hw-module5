@@ -1,7 +1,7 @@
-import './NotFoundPage.module.css';
+import styles from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
-  return <div>NotFoundPage</div>;
+  return <div className={styles.errorPageWrapper}></div>;
 };
 
 export default NotFoundPage;
