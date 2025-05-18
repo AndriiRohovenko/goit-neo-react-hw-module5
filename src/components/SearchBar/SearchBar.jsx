@@ -3,8 +3,15 @@ import { useId } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { toast } from 'react-hot-toast';
 import { GoSearch } from 'react-icons/go';
+import { useState, useEffect } from 'react';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch, value }) {
+  const [inputValue, setInputValue] = useState(value);
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const searchFieldID = useId();
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -14,6 +21,11 @@ function SearchBar({ onSearch }) {
     }
     onSearch(input_value);
   };
+
+  const handleChange = e => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <>
       <header>
@@ -24,8 +36,10 @@ function SearchBar({ onSearch }) {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search Movies"
             id={searchFieldID}
+            value={inputValue}
+            onChange={handleChange}
           />
           <button type="submit" className={styles.searchBtn}>
             <GoSearch />

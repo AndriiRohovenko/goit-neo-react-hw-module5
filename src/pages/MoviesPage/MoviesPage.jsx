@@ -45,19 +45,17 @@ const MoviesPage = () => {
     tranding_movies_fetching();
   }, [searchQuery]);
 
-  console.log(error);
-
   const handleSearch = searchValue => {
     if (!searchValue.trim()) {
       setSearchParams({});
       return;
     }
     searchParams.set('search', searchValue);
-    setSearchParams({ search: searchValue });
+    setSearchParams(searchParams);
   };
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} value={searchQuery} />
       {error && <ErrorMessage message={'Try Different Query!'} />}
       {isLoading ? (
         <Loader isLoading={isLoading} />
