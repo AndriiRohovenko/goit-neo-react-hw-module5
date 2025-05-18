@@ -37,8 +37,6 @@ function MovieReviews() {
     movie_review_data_fetching();
   }, [movieId]);
 
-  console.log(hits);
-
   return (
     <>
       <div className={styles.movieCastWrapper}>
