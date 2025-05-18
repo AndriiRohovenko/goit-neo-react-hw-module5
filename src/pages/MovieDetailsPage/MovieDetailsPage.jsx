@@ -55,6 +55,7 @@ const MovieDetailsPage = () => {
 
   const movie_year = String(hits.release_date).split('-')[0];
   const movie_popularity = String(hits.popularity).split('.')[0];
+  console.log(`https://image.tmdb.org/t/p/w500/${hits.poster_path}`);
 
   return (
     <>
