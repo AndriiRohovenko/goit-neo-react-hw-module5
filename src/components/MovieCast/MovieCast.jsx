@@ -2,7 +2,7 @@ import styles from './MovieCast.module.css';
 
 import { getMovieDetailsCredits } from '../../api/movies';
 
-import { useState, useEffect, act } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
@@ -21,7 +21,7 @@ function MovieCast() {
 
         const data = await getMovieDetailsCredits(movieId);
         if (data) {
-          setHits(data.cast.slice(0, 10));
+          setHits(data.cast.slice(0, 20));
           setError(false);
         } else {
           setError(true);
@@ -46,22 +46,30 @@ function MovieCast() {
   return (
     <>
       <div className={styles.movieCastWrapper}>
+        {error == true && (
+          <ErrorMessage message={'Please try to reload the page!'} />
+        )}
         <ul>
-          {hits.map(actor => (
-            <li className={styles.castItemWrapper} key={actor.id}>
-              <img
-                src={
-                  actor.profile_path
-                    ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
-                    : defaultImg
-                }
-                width={250}
-                alt="Actor photo"
-              />
-              <p>{actor.name}</p>
-              <p>{actor.character}</p>
-            </li>
-          ))}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            hits.map(actor => (
+              <li className={styles.castItemWrapper} key={actor.id}>
+                <img
+                  src={
+                    actor.profile_path
+                      ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                      : defaultImg
+                  }
+                  alt="Actor photo"
+                />
+                <b>
+                  <p>{actor.name}</p>
+                </b>
+                <p>{actor.character}</p>
+              </li>
+            ))
+          )}
         </ul>
       </div>
     </>

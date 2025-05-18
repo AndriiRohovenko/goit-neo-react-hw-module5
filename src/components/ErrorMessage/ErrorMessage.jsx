@@ -4,7 +4,7 @@ function ErrorMessage({ message }) {
   return (
     <>
       <div className={styles.errorMsgWrapper}>
-        <p>No results found. {message} </p>
+        <p>No Data found. {message} </p>
       </div>
     </>
   );
