@@ -45,7 +45,6 @@ const MovieDetailsPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  console.log(location);
 
   const backButtonHandler = () => {
     navigate(location.state ?? '/movies');
