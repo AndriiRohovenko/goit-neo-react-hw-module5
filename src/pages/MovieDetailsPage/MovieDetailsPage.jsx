@@ -45,12 +45,11 @@ const MovieDetailsPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
+  console.log(location);
 
   const backButtonHandler = () => {
     navigate(location.state ?? '/movies');
   };
-
-  console.log(hits);
 
   const defaultImg =
     'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
@@ -104,10 +103,14 @@ const MovieDetailsPage = () => {
         <p>Additional Information</p>
         <ul>
           <li>
-            <NavLink to="cast">Cast</NavLink>
+            <NavLink to="cast" state={location.state}>
+              Cast
+            </NavLink>
           </li>
           <li>
-            <NavLink to="reviews">Reviews</NavLink>
+            <NavLink to="reviews" state={location.state}>
+              Reviews
+            </NavLink>
           </li>
         </ul>
       </div>
